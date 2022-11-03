@@ -8,8 +8,7 @@ require "Classes/userVerif.php";
         $_POST = $post->data;
 // check the array $err < (errors or none)
         if(empty($err)) {
-            header("location: dashboard.php?success"); exit;
+            header("location: index.php?success"); exit;
         }
     }
-  //  header("location: signup.php?err=".$err); exit;
 ?>
