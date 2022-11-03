@@ -93,7 +93,7 @@ require "./php/user.signup.php";
 				<div class="login-menu">
 					<ul>
 						<li>
-							<a href="login.php" 
+							<a href="index.php" 
 								class="btn btn-outline-primary btn-lg btn-block" >
 								Login
 							</a>
