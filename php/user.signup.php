@@ -5,10 +5,10 @@ require "Classes/userVerif.php";
 		// create object > pass post data in params > store returned array in variable
         $post = new UserVerif($_POST);
         $err = $post->Validate(); // array of errors 
-        $_POST = $post->data;
+        $_POST = $post->data; // return data
 // check the array $err < (errors or none)
         if(empty($err)) {
-            header("location: index.php?success"); exit;
+          header("location: login.php?success"); exit;
         }
     }
 ?>
