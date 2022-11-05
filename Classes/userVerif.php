@@ -1,4 +1,5 @@
 <?php
+require "users.class.php";
 class Userverif extends Users {
     public $errors = [];
     public $data = [];
@@ -53,14 +54,13 @@ class Userverif extends Users {
             $this->errors['username'] = "Username must not be empty.";}
         elseif(!preg_match($rgx, $this->data['username'])) {
             $this->errors['username'] = "Username must start with letter, contains at least 3 characters (number,alphabet or underscore).";} 
-        elseif ($this->Exist($username,$email)) {
-            $this->errors['username'] = "Username already in use.";
+        elseif (!$this->Getuser($this->data['username'],$this->data['email'])) {
+            $this->errors['username'] = "Username or email already in use.";
         }
     }
 
     private function Signup() {
-        $pwd = password_hash($this-data['username'],PASSWORD_DEFAULT);
-        return $this->Creatuser($this-data['username'].",".$this-data['email'].",".$pwd);
+        return $this->Creatuser($this->data['email'],$this->data['username'],$this->data['password']);
     }
 
 }
