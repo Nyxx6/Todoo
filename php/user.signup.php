@@ -8,7 +8,7 @@ require "Classes/userVerif.php";
         $_POST = $post->data; // return data
 // check the array $err < (errors or none)
         if(empty($err)) {
-          header("location: login.php?success"); exit;
+          header("location: index.php?success"); exit;
         }
     }
 ?>
