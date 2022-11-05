@@ -109,7 +109,7 @@ require "./php/user.signup.php";
 			<div class="container">
 				<div class="row align-items-center">
 					<div class="col-md-6">
-						<img src="vendors\images\signup.png" alt="" />
+						<img src="src\images\reg.svg" style="max-width: 95%;margin-left:20px" />
 					</div>
 					<div class="col-md-6">
 						<div class="login-box box-shadow border-radius-10">
@@ -155,7 +155,7 @@ require "./php/user.signup.php";
 									<small class="form-text text-muted"><?php echo $err['conf-password'] ?? ''  ?></small>
 								</div>
 								<div class="row align-items-center">
-									<div class="col-6">
+									<div class="col-sm-12">
 										<div class="input-group mb-0">
 											<input class="btn btn-primary btn-lg btn-block" name="submit" type="submit" value="Submit">																				
 										</div>
