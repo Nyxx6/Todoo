@@ -1,4 +1,5 @@
 <?php
+require "users.class.php";
 class Logverif extends Users {
     public $errors = [];
     public $data = [];
@@ -22,16 +23,13 @@ class Logverif extends Users {
 
     public function Validate() {
         if(!$this->Empty()) {
-            $user = $this->Getuser("username,password","uname=".$username);
+            $user = $this->Getuser($this->data['username']);
             if($user->rowCount() < 1) {
                 $this->errors['username'] = "Username not found.";
             }
-            else {$user = $user->fetchAll();
-                if(!password_verify($user['password'],$this->data['password'])) $this->errors['password'] = "Password not correct.";
+            else {$user = $user->fetch(PDO::FETCH_ASSOC);
+                if(!password_verify($user['USER_PASS'],$this->data['password'])) $this->errors['password'] = "Password not correct.";
             }
         }
         return $this->errors;  }
-
-    
-
 }
