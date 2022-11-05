@@ -1,28 +1,28 @@
 <?php
-// this class inherit the Database-Connection class
-// create update get and remove users' accounts requests to database 
-// this class doen't interact with user
+require "dbconnect.php";
+
 class Users extends Dbconnect {
-    protected function Getuser($col,$cond="",$ord="") {
-        $users=$this->select($col,"users",$cond,$ord);
-        return $users->fetchAll();}
+    protected function Getuser($username,$email="") {
+        $dbh = $this->connect();
+        $stmt = $dbh->prepare("select * from user where USER_NAME=?");
+        $stmt->execute([$username]);
+        return $stmt;}
 
-    protected function Creatuser($val) {
-        $users=$this->insert("users",$col,$val); // columns from db
-        return $users->fetchAll();}
+    protected function Creatuser($email,$username,$pwd) {
+        $dbh = $this->connect();
+        $stmt = $dbh->prepare("insert into user(`USER_EMAIL`, `USER_NAME`, `USER_PASS`) values(?,?,?)");
+        $pwd = password_hash($pwd,PASSWORD_DEFAULT);
+        return $stmt->execute([$email,$username,$pwd]);}
 
-    protected function Setuser($col,$cond="") {
-        $users=$this->update($col,"users",$cond);
-        return $users->fetchAll();}
+    protected function Setuser($id,$username,$bd="",$type) {
+        $dbh = $this->connect();
+        $stmt = $dbh->prepare("update `user` set `USER_NAME` = ?, `USER_BD` = ?, `USER_TYPE` = ? WHERE `USER_ID` = ?");
+        return $stmt->execute([$username,$bd,$type,$id]);}
     
-    protected function Deletuser($col,$cond="") {
-        $users=$this->delete($col,"users",$cond);
-        return $users->fetchAll();}
+    protected function Deletuser($id) {
+        $dbh = $this->connect();
+        $stmt = $dbh->prepare("delete from `user` where `USER_ID` = ?");
+        return $stmt->execute([$id]);}
 
-    protected function Exist($username,$email) {        
-        if(!$this->select("username,email","users","uname=".$username." and email=".$email)) {
-            return true;
-        }
-        return false;
-    }
+    
 }
