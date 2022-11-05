@@ -10,7 +10,7 @@ require "Classes/logVerif.php";
         if(empty($err)) {
             session_start();
             $_SESSION = $post->data;
-            header("location: dashboard.php?success"); exit;
+            header("location:dashboard.php?success"); exit;
         }
         $_POST = $post->data; //return uname 
     }
