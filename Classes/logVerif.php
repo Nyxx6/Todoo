@@ -28,7 +28,7 @@ class Logverif extends Users {
                 $this->errors['username'] = "Username not found.";
             }
             else {$user = $user->fetch(PDO::FETCH_ASSOC);
-                if(!password_verify($user['USER_PASS'],$this->data['password'])) $this->errors['password'] = "Password not correct.";
+                if(!password_verify($this->data['password'],$user['USER_PASS']) $this->errors['password'] = "Password not correct.";
             }
         }
         return $this->errors;  }
