@@ -1,4 +1,7 @@
 <?php
+session_start();
+if(!isset($_SESSION['USER_ID']))
+{
 require "./php/user.login.php";
 ?>
 <!DOCTYPE html>
@@ -46,7 +49,11 @@ require "./php/user.login.php";
 			href="vendors/styles/icon-font.min.css"
 		/>
 		<link rel="stylesheet" type="text/css" href="vendors/styles/style.css" />
-
+		<!-- JS VERIF -->
+		<script
+			async
+			src="Todoo\vendors\scripts\verif.js"
+		></script>
 		<!-- Global site tag (gtag.js) - Google Analytics -->
 		<script
 			async
@@ -116,9 +123,10 @@ require "./php/user.login.php";
 							<form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
 								<!--role-->
 								<div class="select-role">
+									<small class="form-text text-muted"><?php echo $err['role'] ?? ''  ?></small>
 									<div class="btn-group btn-group-toggle" data-toggle="buttons">
 										<label class="btn bg-white">
-											<input type="radio" name="options" id="admin">
+											<input type="radio" name="role" value="1" id="admin">
 											<div class="icon">
 												<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" class="svg replaced-svg">
 													<g id="briefcase" transform="translate(-16.495 -48.714)">
@@ -135,7 +143,7 @@ require "./php/user.login.php";
 											Admin
 										</label>
 										<label class="btn bg-white">
-											<input type="radio" name="role" id="user" checked>
+											<input type="radio" name="role" id="user" value="0" checked>
 											<div class="icon">
 												<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" class="svg replaced-svg">
 													<g id="person" transform="translate(66.7 -14.994)">
@@ -150,28 +158,29 @@ require "./php/user.login.php";
 											User
 										</label>
 									</div>
-								</div><?php echo $err['empty'] ?? ''  ?>
+								</div><?php echo $err['empty'] ?? '';  ?>
+								<small class="form-text text-muted"><?php echo $err['username'] ?? ''  ?></small>
 								<!--role-->
 								<div class="input-group custom">
 									<input
 										type="text"
 										class="form-control form-control-lg"
 										value="<?php echo $_POST['username'] ?? '' ?>"
-										name="username" 
+										name="username" id="un"
 									/>
 									<div class="input-group-append custom">
 										<span class="input-group-text"
 											><i class="icon-copy dw dw-user1"></i
 										></span>
 									</div>
-									<small class="form-text text-muted"><?php echo $err['username'] ?? ''  ?></small>
+									
 								</div>
 								<div class="input-group custom">
 									<input
 										type="password"
 										class="form-control form-control-lg"
 										placeholder="********"
-										name="password" 
+										name="password" id="ps"
 									/>
 									<div class="input-group-append custom">
 										<span class="input-group-text"
@@ -247,3 +256,6 @@ require "./php/user.login.php";
 		<!-- End Google Tag Manager (noscript) -->
 	</body>
 </html>
+<?php } else {
+	header("location:dashboard.php");exit;}
+?>
