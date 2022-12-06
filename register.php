@@ -7,6 +7,7 @@ require "./php/user.signup.php";
 		<!-- Basic Page Info -->
 		<meta charset="utf-8" />
 		<title>Todoo</title>
+         <script src="vendors/scripts/verify.js"></script>
 
 		<!-- Site favicon -->
 		<link
@@ -100,7 +101,7 @@ require "./php/user.signup.php";
 						</li>
 					</ul>
 				</div>
-				</div>
+				
 			</div>
 		</div>
 		<div
@@ -117,7 +118,7 @@ require "./php/user.signup.php";
 								<h2 class="text-center text-primary">Register</h2>
 							</div>
 							<small class="form-text text-muted mb-20"><?php echo $err['empty'] ?? '' //var_dump($post->data)?></small>
-							<form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
+							<form id="Register" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
 								<div class="form-group">
 									<label class="form-control-label">Email*</label>
 									<input
@@ -125,8 +126,13 @@ require "./php/user.signup.php";
 										type="email"
 										value="<?php echo $_POST['email'] ?? '' ?>"
 										name="email"
+                                           id="email"
+                                           onkeyup="ValidateRegister(email.value)"
+                                           
 									/>
 								</div>
+                                
+                                
 								<div class="form-group ">
 								<label class="form-control-label">Pseudo*</label>
 									<input
@@ -134,30 +140,40 @@ require "./php/user.signup.php";
 										type="text"
 										value="<?php echo $_POST['username'] ?? '' ?>"
 										name="username"
+                                           id="username"
 									/>
 								</div>
+                                
+                                
 								<div class="form-group">
 									<label class="form-control-label">Password*</label>
 									<input
 										class="form-control form-control-lg"
 										type="password"
 										name="password"
+                                           id="password"
+                                           onkeyup="ValidateRegister(password.value)"
 									/>
 									<small class="form-text text-muted"><?php echo $err['password'] ?? ''  ?></small>
 								</div>
+                                
+                                
+                                
 								<div class="form-group ">
 								<label class="form-control-label">Confirm Password*</label>
 									<input
 										class="form-control form-control-lg"
 										type="password"
 										name="conf-password"
+                                        id="conf-password"
 									/>
 									<small class="form-text text-muted"><?php echo $err['conf-password'] ?? ''  ?></small>
 								</div>
 								<div class="row align-items-center">
 									<div class="col-sm-12">
 										<div class="input-group mb-0">
-											<input class="btn btn-primary btn-lg btn-block" name="submit" type="submit" value="Submit">																				
+											<input class="btn btn-primary btn-lg btn-block" name="submit" type="submit" value="Register"
+                                                 id="sub"  disabled  >																				
 										</div>
 									</div>
 								</div>
